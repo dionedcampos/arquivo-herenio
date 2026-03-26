@@ -2,14 +2,14 @@
 
 :root {
     /* Themes - Default Dark (Neon Luminary) */
-    --primary: #6366f1;
-    --primary-glow: rgba(99, 102, 241, 0.4);
-    --primary-bright: #818cf8;
-    --accent: #8b5cf6;
+    --primary: #155dfc;
+    --primary-glow: rgba(21, 93, 252, 0.4);
+    --primary-bright: #3b82f6;
+    --accent: #2563eb;
 
     --bg-main: #0f172a;
-    --bg-gradient-1: rgba(99, 102, 241, 0.12);
-    --bg-gradient-2: rgba(139, 92, 246, 0.08);
+    --bg-gradient-1: rgba(21, 93, 252, 0.12);
+    --bg-gradient-2: rgba(37, 99, 235, 0.08);
 
     --bg-card: rgba(30, 41, 59, 0.6);
     --bg-card-hover: rgba(30, 41, 59, 0.8);
@@ -38,8 +38,8 @@
 body.light-mode {
     /* Solar Luminary Palette - High contrast, soft depth */
     --bg-main: #f8fafc;
-    --bg-gradient-1: rgba(99, 102, 241, 0.05);
-    --bg-gradient-2: rgba(139, 92, 246, 0.04);
+    --bg-gradient-1: rgba(21, 93, 252, 0.05);
+    --bg-gradient-2: rgba(37, 99, 235, 0.04);
 
     --bg-card: rgba(255, 255, 255, 0.8);
     --bg-card-hover: #ffffff;
@@ -55,7 +55,7 @@ body.light-mode {
     --title-gradient: linear-gradient(135deg, #0f172a 0%, #475569 100%);
 
     --card-shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
-    --card-shadow-hover-glow: 0 0 15px rgba(99, 102, 241, 0.04);
+    --card-shadow-hover-glow: 0 0 15px rgba(21, 93, 252, 0.04);
 }
 
 @media (max-width: 768px) {
@@ -225,7 +225,7 @@ h3,
 }
 
 #year-filter {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236366f1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23155dfc'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1.25rem center;
     background-size: 1.25rem;
@@ -237,7 +237,7 @@ h3,
 #year-filter:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 25px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 0 25px rgba(21, 93, 252, 0.15);
     background: var(--bg-card-hover);
 }
 
