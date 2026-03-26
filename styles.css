@@ -21,7 +21,11 @@
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --text-article: #cbd5e1;
+    --text-on-hover: #ffffff;
     --title-gradient: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+
+    --card-shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    --card-shadow-hover-glow: 0 0 20px rgba(99, 102, 241, 0.1);
 
     /* Shared Tokens */
     --container-max-width: 1100px;
@@ -47,7 +51,11 @@ body.light-mode {
     --text-main: #0f172a;
     --text-muted: #64748b;
     --text-article: #334155;
+    --text-on-hover: var(--primary);
     --title-gradient: linear-gradient(135deg, #0f172a 0%, #475569 100%);
+
+    --card-shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover-glow: 0 0 15px rgba(99, 102, 241, 0.04);
 }
 
 @media (max-width: 768px) {
@@ -296,9 +304,7 @@ h3,
     transform: translateY(-6px) scale(1.02);
     border-color: var(--border-glass-bright);
     background: var(--bg-card-hover);
-    box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.6),
-        0 0 20px rgba(99, 102, 241, 0.1);
+    box-shadow: var(--card-shadow-hover), var(--card-shadow-hover-glow);
 }
 
 .post-date {
@@ -319,7 +325,7 @@ h3,
 }
 
 .post-card:hover h3 {
-    color: #fff;
+    color: var(--text-on-hover);
 }
 
 .post-card h3 a {
