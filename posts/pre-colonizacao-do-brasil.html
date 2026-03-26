@@ -78,33 +78,6 @@ COMANDADAS POR CRISTÓVÃO JACQUES SOB MANDO DA COROA PORTUGUESA, QUE OCORRERAM 
         <!-- SVG will be injected by js -->
     </button>
     <script src="../theme.js"></script>
-    <!-- PWA Install Modal -->
-    <div id="pwa-install-overlay" class="pwa-modal-overlay">
-        <div class="pwa-modal">
-            <button id="pwa-close-modal" class="close-modal" aria-label="Fechar">&times;</button>
-            <img src="../icon-512.png" class="pwa-modal-icon" alt="App Icon">
-            <div id="pwa-main-content">
-                <h2>Instalar Aplicativo</h2>
-                <p>Instale o Arquivo Herênio na sua tela inicial para acesso rápido e leitura offline, como um aplicativo nativo.</p>
-                <div class="pwa-actions">
-                    <button id="pwa-install-btn" class="btn-install">Instalar Agora</button>
-                    <button id="pwa-maybe-later" class="btn-maybe-later">Talvez mais tarde</button>
-                </div>
-            </div>
-            <div id="pwa-ios-instructions" style="display: none;">
-                <h2>Instalar no iOS</h2>
-                <p>Para instalar este aplicativo no seu iPhone ou iPad:</p>
-                <div class="ios-instructions">
-                    1. Toque no ícone de compartilhar <span class="ios-share-icon"></span> na barra inferior.<br>
-                    2. Role para baixo e toque em <strong>"Adicionar à Tela de Início"</strong>.
-                </div>
-                <div class="pwa-actions" style="margin-top: 1.5rem;">
-                    <button onclick="document.getElementById('pwa-install-overlay').classList.remove('show')" class="btn-maybe-later">Entendi</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="../pwa-install.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
