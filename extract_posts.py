@@ -47,6 +47,14 @@ def generate_post_html(title, date, content, slug):
     <title>{title} - Arquivo Herênio</title>
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        (function() {{
+            const savedTheme = localStorage.getItem('herenio-theme');
+            if (savedTheme === 'light') {{
+                document.documentElement.classList.add('light-mode');
+            }}
+        }})();
+    </script>
 </head>
 <body>
     <header class="main-header">
@@ -71,6 +79,10 @@ def generate_post_html(title, date, content, slug):
             <p>&copy; 2026 Arquivo Herênio - Todos os direitos reservados.</p>
         </div>
     </footer>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+        <!-- SVG will be injected by js -->
+    </button>
+    <script src="../theme.js"></script>
 </body>
 </html>
 """
@@ -205,6 +217,14 @@ def main():
     <title>Arquivo Herênio - Blog do Professor Herênio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        (function() {{
+            const savedTheme = localStorage.getItem('herenio-theme');
+            if (savedTheme === 'light') {{
+                document.documentElement.classList.add('light-mode');
+            }}
+        }})();
+    </script>
 </head>
 <body>
     <header class="main-header">
@@ -246,6 +266,10 @@ def main():
             <p>&copy; 2026 Arquivo Herênio - Preservação Digital</p>
         </div>
     </footer>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+        <!-- SVG will be injected by js -->
+    </button>
+    <script src="theme.js"></script>
     <script src="search.js"></script>
 </body>
 </html>

@@ -7,6 +7,14 @@
     <title>Enquanto todo mundo espera a cura do mal e a loucura finge que isso tudo é normal eu finjo ter paciência e o mundo vai girando cada vez mais veloz a gente espera do mundo e o mundo espera de nós um pouco mais de paciência - Arquivo Herênio</title>
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('herenio-theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-mode');
+            }
+        })();
+    </script>
 </head>
 <body>
     <header class="main-header">
@@ -43,5 +51,9 @@
             <p>&copy; 2026 Arquivo Herênio - Todos os direitos reservados.</p>
         </div>
     </footer>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+        <!-- SVG will be injected by js -->
+    </button>
+    <script src="../theme.js"></script>
 </body>
 </html>
