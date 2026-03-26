@@ -89,14 +89,30 @@ def generate_post_html(title, date, content, slug):
         <!-- SVG will be injected by js -->
     </button>
     <script src="../theme.js"></script>
-    <div id="install-banner" class="install-banner">
-        <div class="banner-content">
-            <img src="../favicon.png" class="banner-icon" alt="App Icon">
-            <div class="banner-text">Instale o Arquivo Herênio para acesso rápido e offline.</div>
-        </div>
-        <div class="banner-actions">
-            <button id="install-btn">Instalar</button>
-            <button id="close-install-banner" class="close-banner" aria-label="Fechar">&times;</button>
+    <!-- PWA Install Modal -->
+    <div id="pwa-install-overlay" class="pwa-modal-overlay">
+        <div class="pwa-modal">
+            <button id="pwa-close-modal" class="close-modal" aria-label="Fechar">&times;</button>
+            <img src="../icon-512.png" class="pwa-modal-icon" alt="App Icon">
+            <div id="pwa-main-content">
+                <h2>Instalar Aplicativo</h2>
+                <p>Instale o Arquivo Herênio na sua tela inicial para acesso rápido e leitura offline, como um aplicativo nativo.</p>
+                <div class="pwa-actions">
+                    <button id="pwa-install-btn" class="btn-install">Instalar Agora</button>
+                    <button id="pwa-maybe-later" class="btn-maybe-later">Talvez mais tarde</button>
+                </div>
+            </div>
+            <div id="pwa-ios-instructions" style="display: none;">
+                <h2>Instalar no iOS</h2>
+                <p>Para instalar este aplicativo no seu iPhone ou iPad:</p>
+                <div class="ios-instructions">
+                    1. Toque no ícone de compartilhar <span class="ios-share-icon"></span> na barra inferior.<br>
+                    2. Role para baixo e toque em <strong>"Adicionar à Tela de Início"</strong>.
+                </div>
+                <div class="pwa-actions" style="margin-top: 1.5rem;">
+                    <button onclick="document.getElementById('pwa-install-overlay').classList.remove('show')" class="btn-maybe-later">Entendi</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="../pwa-install.js"></script>
@@ -117,12 +133,31 @@ def generate_post_html(title, date, content, slug):
         f.write(template)
     return f"posts/{slug}.html"
 
+def rewrite_image_urls(content):
+    if not content:
+        return ""
+    
+    # Domains to catch
+    broken_domains = [
+        r'herenio\.local/wp-content/uploads/',
+        r'herenio\.com\.br/wp-content/uploads/',
+        r'www\.herenio\.com\.br/wp-content/uploads/',
+        r'herenio\.site90\.com/wp-content/uploads/',
+        r'162\.243\.91\.68:8888/wp-content/uploads/'
+    ]
+    
+    for domain in broken_domains:
+        # Replace absolute URLs with relative paths to our local media folder
+        # Files are in /posts/ so media is at ../media/
+        content = re.sub(r'https?://' + domain, '../media/', content)
+    
+    return content
+
 def convert_videos_to_embeds(content):
     if not content:
         return ""
     
     # YouTube patterns
-    # https://www.youtube.com/watch?v=...
     content = re.sub(
         r'(?:https?://)?(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)([a-zA-Z0-9_-]+)(?:[^\s<>"]*)',
         r'<div class="video-container"><iframe src="https://www.youtube.com/embed/\1" frameborder="0" allowfullscreen></iframe></div>',
@@ -130,7 +165,6 @@ def convert_videos_to_embeds(content):
     )
     
     # Vimeo patterns
-    # https://vimeo.com/...
     content = re.sub(
         r'(?:https?://)?(?:www\.)?vimeo\.com/(\d+)(?:[^\s<>"]*)',
         r'<div class="video-container"><iframe src="https://player.vimeo.com/video/\1" frameborder="0" allowfullscreen></iframe></div>',
@@ -150,6 +184,9 @@ def clean_html(content):
     # Handle line breaks - WordPress often lacks p tags and uses newlines
     if '<p' not in content:
         content = '<p>' + content.replace('\n\n', '</p><p>').replace('\n', '<br>') + '</p>'
+    
+    # Rewrite broken image URLs
+    content = rewrite_image_urls(content)
     
     # Process video links
     content = convert_videos_to_embeds(content)
@@ -303,14 +340,30 @@ def main():
     </button>
     <script src="theme.js"></script>
     <script src="search.js"></script>
-    <div id="install-banner" class="install-banner">
-        <div class="banner-content">
-            <img src="favicon.png" class="banner-icon" alt="App Icon">
-            <div class="banner-text">Instale o Arquivo Herênio para acesso rápido e offline.</div>
-        </div>
-        <div class="banner-actions">
-            <button id="install-btn">Instalar</button>
-            <button id="close-install-banner" class="close-banner" aria-label="Fechar">&times;</button>
+    <!-- PWA Install Modal -->
+    <div id="pwa-install-overlay" class="pwa-modal-overlay">
+        <div class="pwa-modal">
+            <button id="pwa-close-modal" class="close-modal" aria-label="Fechar">&times;</button>
+            <img src="icon-512.png" class="pwa-modal-icon" alt="App Icon">
+            <div id="pwa-main-content">
+                <h2>Instalar Aplicativo</h2>
+                <p>Instale o Arquivo Herênio na sua tela inicial para acesso rápido e leitura offline, como um aplicativo nativo.</p>
+                <div class="pwa-actions">
+                    <button id="pwa-install-btn" class="btn-install">Instalar Agora</button>
+                    <button id="pwa-maybe-later" class="btn-maybe-later">Talvez mais tarde</button>
+                </div>
+            </div>
+            <div id="pwa-ios-instructions" style="display: none;">
+                <h2>Instalar no iOS</h2>
+                <p>Para instalar este aplicativo no seu iPhone ou iPad:</p>
+                <div class="ios-instructions">
+                    1. Toque no ícone de compartilhar <span class="ios-share-icon"></span> na barra inferior.<br>
+                    2. Role para baixo e toque em <strong>"Adicionar à Tela de Início"</strong>.
+                </div>
+                <div class="pwa-actions" style="margin-top: 1.5rem;">
+                    <button onclick="document.getElementById('pwa-install-overlay').classList.remove('show')" class="btn-maybe-later">Entendi</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="pwa-install.js"></script>

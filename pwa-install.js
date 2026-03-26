@@ -1,24 +1,36 @@
 
 let deferredPrompt;
-const installBanner = document.getElementById('install-banner');
-const installBtn = document.getElementById('install-btn');
-const closeBtn = document.getElementById('close-install-banner');
+const pwaOverlay = document.getElementById('pwa-install-overlay');
+const installBtn = document.getElementById('pwa-install-btn');
+const closeBtn = document.getElementById('pwa-close-modal');
+const maybeLaterBtn = document.getElementById('pwa-maybe-later');
+
+console.log('PWA script carregado. Overlay:', pwaOverlay);
 
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    // Impedir que o Chrome mostre o prompt automático
     e.preventDefault();
-    // Stash the event so it can be triggered later.
+    // Salvar o evento
     deferredPrompt = e;
 
-    // Check if user has already dismissed it in this session or recently
-    if (!localStorage.getItem('pwa-banner-dismissed')) {
-        showInstallBanner();
+    // Verificar se o usuário já dispensou permanentemente
+    if (!localStorage.getItem('pwa-modal-dismissed')) {
+        showPwaModal();
     }
 });
 
-function showInstallBanner() {
-    if (installBanner) {
-        installBanner.classList.add('show');
+function showPwaModal() {
+    if (pwaOverlay) {
+        pwaOverlay.classList.add('show');
+    }
+}
+
+function hidePwaModal(permanent = false) {
+    if (pwaOverlay) {
+        pwaOverlay.classList.remove('show');
+        if (permanent) {
+            localStorage.setItem('pwa-modal-dismissed', 'true');
+        }
     }
 }
 
@@ -26,42 +38,36 @@ if (installBtn) {
     installBtn.addEventListener('click', (e) => {
         if (!deferredPrompt) return;
 
-        // Show the prompt
         deferredPrompt.prompt();
 
-        // Wait for the user to respond to the prompt
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
+                console.log('Usuário aceitou a instalação');
+                localStorage.setItem('pwa-modal-dismissed', 'true');
             } else {
-                console.log('User dismissed the A2HS prompt');
+                console.log('Usuário recusou a instalação');
             }
             deferredPrompt = null;
-            hideInstallBanner();
+            hidePwaModal();
         });
     });
 }
 
 if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-        hideInstallBanner();
-        // Don't show again for 24 hours
-        localStorage.setItem('pwa-banner-dismissed', Date.now());
-    });
+    closeBtn.addEventListener('click', () => hidePwaModal(true));
 }
 
-function hideInstallBanner() {
-    if (installBanner) {
-        installBanner.classList.remove('show');
-    }
+if (maybeLaterBtn) {
+    maybeLaterBtn.addEventListener('click', () => hidePwaModal(false));
 }
 
 window.addEventListener('appinstalled', (evt) => {
-    console.log('App foi instalado');
-    hideInstallBanner();
+    console.log('PWA instalado com sucesso');
+    localStorage.setItem('pwa-modal-dismissed', 'true');
+    hidePwaModal();
 });
 
-// iOS basic detection
+// Detecção básica de iOS
 const isIos = () => {
     const userAgent = window.navigator.userAgent.toLowerCase();
     return /iphone|ipad|ipod/.test(userAgent);
@@ -70,15 +76,14 @@ const isIos = () => {
 const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
 if (isIos() && !isInStandaloneMode()) {
-    if (!localStorage.getItem('pwa-banner-dismissed')) {
-        // Show banner with iOS instructions
-        if (installBanner) {
-            const bannerText = installBanner.querySelector('.banner-text');
-            if (bannerText) {
-                bannerText.innerHTML = 'Instale como App: toque em <span class="ios-share-icon"></span> e depois em "Adicionar à Tela de Início"';
-            }
-            if (installBtn) installBtn.style.display = 'none';
-            showInstallBanner();
+    if (!localStorage.getItem('pwa-modal-dismissed')) {
+        const iosInstructions = document.getElementById('pwa-ios-instructions');
+        const pwaMainContent = document.getElementById('pwa-main-content');
+
+        if (iosInstructions && pwaMainContent) {
+            pwaMainContent.style.display = 'none';
+            iosInstructions.style.display = 'block';
+            showPwaModal();
         }
     }
 }

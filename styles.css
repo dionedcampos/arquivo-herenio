@@ -500,83 +500,132 @@ body.light-mode .theme-toggle {
     }
 }
 
-/* PWA Install Banner */
-.install-banner {
+/* PWA Install Modal (Neon Luminary) */
+.pwa-modal-overlay {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    padding: 15px 20px;
-    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
     align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transform: translateY(150%);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
-.install-banner.show {
+.pwa-modal-overlay.show {
+    display: flex;
+    opacity: 1;
+}
+
+.pwa-modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass-bright);
+    border-radius: 24px;
+    padding: 2.5rem;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--primary-glow);
+    transform: translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pwa-modal-overlay.show .pwa-modal {
     transform: translateY(0);
 }
 
-.banner-content {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.pwa-modal .close-modal {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s ease;
 }
 
-.banner-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-.banner-text {
-    font-size: 0.9rem;
+.pwa-modal .close-modal:hover {
     color: var(--text-main);
-    line-height: 1.4;
 }
 
-.banner-actions {
+.pwa-modal-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.pwa-modal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+}
+
+.pwa-modal p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.pwa-actions {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-#install-btn {
-    background: var(--accent-primary);
+.btn-install {
+    background: var(--primary);
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 10px;
+    padding: 1rem;
+    border-radius: 12px;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-#install-btn:hover {
-    box-shadow: 0 0 15px var(--accent-glow);
+.btn-install:hover {
+    background: var(--primary-bright);
+    box-shadow: 0 0 20px var(--primary-glow);
     transform: translateY(-2px);
 }
 
-.close-banner {
+.btn-maybe-later {
     background: none;
-    border: none;
-    color: var(--text-dim);
-    font-size: 1.2rem;
+    border: 1px solid var(--border-glass);
+    color: var(--text-muted);
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
     cursor: pointer;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-maybe-later:hover {
+    border-color: var(--border-glass-bright);
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ios-instructions {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-glass);
+    font-size: 0.85rem;
 }
 
 .ios-share-icon {
@@ -586,17 +635,4 @@ body.light-mode .theme-toggle {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23155dfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>') no-repeat center;
     vertical-align: middle;
     margin: 0 3px;
-}
-
-@media (max-width: 600px) {
-    .install-banner {
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
-        padding: 12px 15px;
-    }
-
-    .banner-text {
-        font-size: 0.8rem;
-    }
 }
