@@ -1,0 +1,17 @@
+# Antigravity & AI Agent directories
+.agent/
+.skills-repo/
+.skills/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# OS generated files
+pcache/
+logs/
