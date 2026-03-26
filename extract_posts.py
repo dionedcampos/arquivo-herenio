@@ -88,6 +88,17 @@ def generate_post_html(title, date, content, slug):
         <!-- SVG will be injected by js -->
     </button>
     <script src="../theme.js"></script>
+    <div id="install-banner" class="install-banner">
+        <div class="banner-content">
+            <img src="../favicon.png" class="banner-icon" alt="App Icon">
+            <div class="banner-text">Instale o Arquivo Herênio para acesso rápido e offline.</div>
+        </div>
+        <div class="banner-actions">
+            <button id="install-btn">Instalar</button>
+            <button id="close-install-banner" class="close-banner" aria-label="Fechar">&times;</button>
+        </div>
+    </div>
+    <script src="../pwa-install.js"></script>
     <script>
         if ('serviceWorker' in navigator) {{
             window.addEventListener('load', () => {{
@@ -170,8 +181,8 @@ def main():
         if post_type_el is None or status_el is None:
             continue
 
-        post_type = post_type_el.text
-        status = status_el.text
+        post_type = getattr(post_type_el, 'text', '')
+        status = getattr(status_el, 'text', '')
         
         if post_type == 'post' and status == 'publish':
             title_el = item.find('title')
@@ -290,6 +301,17 @@ def main():
     </button>
     <script src="theme.js"></script>
     <script src="search.js"></script>
+    <div id="install-banner" class="install-banner">
+        <div class="banner-content">
+            <img src="favicon.png" class="banner-icon" alt="App Icon">
+            <div class="banner-text">Instale o Arquivo Herênio para acesso rápido e offline.</div>
+        </div>
+        <div class="banner-actions">
+            <button id="install-btn">Instalar</button>
+            <button id="close-install-banner" class="close-banner" aria-label="Fechar">&times;</button>
+        </div>
+    </div>
+    <script src="pwa-install.js"></script>
     <script>
         if ('serviceWorker' in navigator) {{
             window.addEventListener('load', () => {{

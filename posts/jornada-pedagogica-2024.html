@@ -56,6 +56,17 @@
         <!-- SVG will be injected by js -->
     </button>
     <script src="../theme.js"></script>
+    <div id="install-banner" class="install-banner">
+        <div class="banner-content">
+            <img src="../favicon.png" class="banner-icon" alt="App Icon">
+            <div class="banner-text">Instale o Arquivo Herênio para acesso rápido e offline.</div>
+        </div>
+        <div class="banner-actions">
+            <button id="install-btn">Instalar</button>
+            <button id="close-install-banner" class="close-banner" aria-label="Fechar">&times;</button>
+        </div>
+    </div>
+    <script src="../pwa-install.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
