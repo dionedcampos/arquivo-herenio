@@ -12,6 +12,5 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# OS generated files
-pcache/
-logs/
+# Documentation
+doc/
