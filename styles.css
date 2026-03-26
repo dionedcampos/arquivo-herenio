@@ -322,6 +322,11 @@ h3,
     line-height: 1.3;
     color: var(--text-main);
     transition: color var(--transition-fast);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .post-card:hover h3 {
