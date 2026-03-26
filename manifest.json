@@ -1,0 +1,17 @@
+{
+  "name": "Arquivo Herênio",
+  "short_name": "Herênio",
+  "description": "Arquivo de aulas e conteúdos do Professor Herênio.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#155dfc",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
