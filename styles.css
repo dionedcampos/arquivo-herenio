@@ -462,6 +462,21 @@ body.light-mode .theme-toggle {
     font-size: 0.9rem;
     font-weight: 300;
     letter-spacing: 0.05em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.main-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.main-footer a:hover {
+    color: var(--primary-glow);
+    text-shadow: 0 0 10px var(--primary-glow);
 }
 
 /* Focus and Accessibility */

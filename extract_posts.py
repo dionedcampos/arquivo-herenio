@@ -82,6 +82,7 @@ def generate_post_html(title, date, content, slug):
     <footer class="main-footer">
         <div class="container">
             <p>&copy; 2026 Arquivo Herênio - Todos os direitos reservados.</p>
+            <p class="credits">Criado com carinho pela <a href="https://startaweb.com.br" target="_blank">Startaweb</a></p>
         </div>
     </footer>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
@@ -294,6 +295,7 @@ def main():
     <footer class="main-footer">
         <div class="container">
             <p>&copy; 2026 Arquivo Herênio - Preservação Digital</p>
+            <p class="credits">Criado com carinho pela <a href="https://startaweb.com.br" target="_blank">Startaweb</a></p>
         </div>
     </footer>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
